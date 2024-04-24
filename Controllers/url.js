@@ -17,7 +17,7 @@ await URL.create({
 
 })
 
-return res.json({id:shortID}) ; 
+return res.json({id:shortid}) ; 
 }
 
 module.exports= {
