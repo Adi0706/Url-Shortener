@@ -1,59 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>URL Redirects</title>
-  <style>
-    .url-table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-    .url-table th, .url-table td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-    .url-table th {
-      background-color: #f2f2f2;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME PAGE</title>
+    <style>
+        /* Add some basic styling for table */
+        table {
+            width: 80%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <h1>URL Redirects</h1>
+    <h1>URL SHORTENER PROJECT</h1>
+    <div style="display: flex; flex-direction: column; gap: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <form action="/api/url" method="POST">
+            <label>ENTER YOUR ORIGINAL URL</label>
+            <input type="text" name="url" placeholder="http://example.com"/>
+            <button type="submit" style="width: 20vw;">GENERATE URL</button>
+        </form>
 
-  <h2>Add New URL</h2>
-  <form action="/api/url" method="POST">
-    <label for="redirectURL">Redirect URL:</label><br>
-    <input type="text" id="redirectURL" name="redirectURL" required><br><br>
-    <button type="submit">Add URL</button>
-  </form>
-
-  <% if (locals.urls) { %>
-    <h2>Existing URLs</h2>
-    <table class="url-table">
-      <thead>
-        <tr>
-          <th>S No.</th>
-          <th>Short ID</th>
-          <th>Redirect URL</th>
-          <th>Clicks</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% urls.forEach((url, index) => { %>
-          <tr>
-            <td><%= index + 1 %></td>
-            <td><a href="http://localhost:8001/<%= url.shortID %>">http://localhost:8001/<%= url.shortID %></a></td>
-
-             <td><%= url.redirectURL %></td>
-            <td><%= url.visitHistory.length %></td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  <% } else { %>
-    <p>No URLs found.</p>
-  <% } %>
+     <% if (locals.id) { %>
+      <p>URL GENERATED :http://localhost:8001/api/url/<%=id%></p>
+     <% } %>
+    </div>
 </body>
 </html>
