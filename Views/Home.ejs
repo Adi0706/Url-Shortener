@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Redirects</title>
+  <style>
+    .url-table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .url-table th, .url-table td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    .url-table th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>URL Redirects</h1>
+
+  <h2>Add New URL</h2>
+  <form action="/api/url" method="POST">
+    <label for="redirectURL">Redirect URL:</label><br>
+    <input type="text" id="redirectURL" name="redirectURL" required><br><br>
+    <button type="submit">Add URL</button>
+  </form>
+
+  <% if (locals.urls) { %>
+    <h2>Existing URLs</h2>
+    <table class="url-table">
+      <thead>
+        <tr>
+          <th>S No.</th>
+          <th>Short ID</th>
+          <th>Redirect URL</th>
+          <th>Clicks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% urls.forEach((url, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><a href="http://localhost:8001/<%= url.shortID %>">http://localhost:8001/<%= url.shortID %></a></td>
+
+             <td><%= url.redirectURL %></td>
+            <td><%= url.visitHistory.length %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>No URLs found.</p>
+  <% } %>
+</body>
+</html>
